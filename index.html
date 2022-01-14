@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>Hamburger menu design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
+        integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <!-- overlay menu -->
+    <div class="overlay-menu">
+        <img class="overlay-menu__img" src="blue.png" />
+
+        <div class="overlay-menu__lead">
+
+            <div class="overlay-menu__header circle--small">
+
+                <div class="overlay-menu__headerbody">
+
+                    <h3 class="overlay-menu__heading">Lorem ipsum <br> dolor sit<br> consectetur</h3>
+                    <span class="overlay-menu__subheading">
+                        Suscipit porro velit cumque eaque fugit eius. <i style="font-size: 4rem;"
+                            class="ri-arrow-right-line"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="overlay-menu__list">
+            <h3 class="overlay-menu__item">Projects</h3>
+            <h3 class="overlay-menu__item">About us</h3>
+            <h3 class="overlay-menu__item">Services</h3>
+            <h3 class="overlay-menu__item">Contact</h3>
+        </div>
+        <div class="circle--large">
+        </div>
+
+    </div>
+    <!-- end overlay menu -->
+
+    <!-- main container -->
+
+    <div class="container">
+
+        <nav class="main-nav">
+            <div class="main-nav__item logo">detaility.</div>
+            <div class="main-nav__item hamburger"><i class="ri-menu-line"></i></div>
+        </nav>
+
+        <section class="hero">
+
+            <div class="hero__img">
+                <img src="totoro.png" />
+            </div>
+            <div class="hero__body">
+                <div class="hero__bg-number">
+                    02
+                </div>
+                <div class="hero__header">
+                    <span class="hero__subheading">Product & Packaging Design</span>
+                    <h2 class="hero__heading">Traditional <br />Saké Packaging</h2>
+
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+<script>
+
+    (function () {
+
+        let toggledMenu = false;
+        let btn = document.querySelector('.hamburger');
+        var tl = gsap.timeline({ repeat: 0, repeatDelay: 0 });
+        var tl2 = gsap.timeline({ repeat: 0, repeatDelay: 0 });
+
+        gsap.from(".hero__img", { opacity: 0, y: 150, duration: 1, ease: Power2.easeOut });
+        gsap.from(".hero__body", { opacity: 0, x: 100, duration: 1, ease: Power2.easeOut, delay: 0.5 });
+
+        tl.from(".overlay-menu", { xPercent: -100, duration: 1, ease: Power2.easeOut });
+        tl.from(".overlay-menu .overlay-menu__list h3", { opacity: 0, y: 100, duration: 0.5, stagger: 0.2 });
+        tl.from([".overlay-menu__heading", ".overlay-menu__subheading"], { opacity: 0, x: -100, duration: 0.5, stagger: 0.2 });
+
+        tl2.from(".overlay-menu > img", { opacity: 0, duration: 1, ease: Power2.easeOut, delay: 1, rotation: -20, transformOrigin: "left 50%" });
+
+        btn.addEventListener('click', function () {
+
+            let overlayMenu = document.querySelector('.overlay-menu');
+            let hamburger = document.querySelector('.hamburger');
+
+            overlayMenu.style.display = 'flex';
+
+            let logo = document.querySelector('.logo');
+            if (!toggledMenu) {
+                logo.classList.add('logo--white');
+                hamburger.classList.add('active');
+
+                tl.restart();
+                tl2.restart();
+            }
+            else {
+                tl.reverse();
+                logo.classList.remove('logo--white');
+                hamburger.classList.remove('active');
+
+            }
+            toggledMenu = !toggledMenu;
+        });
+    })();
+</script>
+
+</html>
